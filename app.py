@@ -1,6 +1,6 @@
 import streamlit as st
 import google.generativeai as genai
-
+model = genai.GenerativeModel('gemini-1.5-flash')
 # إعدادات الواجهة
 st.set_page_config(page_title="Solo Leveling System", layout="centered")
 
@@ -33,3 +33,11 @@ if st.button("تحليل النظام ⚔️"):
             st.error(f"حدث خطأ: {e}")
     else:
         st.warning("أدخل اسم الوجبة أولاً")
+with st.spinner('⚡ جاري سحب البيانات من البوابة...'):
+    try:
+        # هنا يوضع كود التحليل
+        res = model.generate_content(food)
+        st.write(res.text)
+    except Exception as e:
+        st.error("⚠️ فشل الاتصال بالبوابة، حاول مرة أخرى.")
+        response = model.generate_content(f"بأسلوب نظام Solo Leveling، اعطني سعرات {food} والماكروز باختصار شديد جداً.")
