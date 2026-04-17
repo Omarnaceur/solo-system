@@ -1,2 +1,9 @@
-streamlit>=1.30.0
-google-generativeai>=0.3.0
+# النواة الأساسية للواجهة
+streamlit>=1.35.0
+
+# محرك الذكاء الاصطناعي (أحدث إصدار مستقر)
+google-generativeai>=0.8.0
+
+# مكتبات دعم السرعة ومعالجة البيانات
+protobuf>=3.20.3
+requests>=2.31.0
