@@ -1,5 +1,21 @@
 import streamlit as st
 import google.generativeai as genai
+
+# الربط الذكي بالبوابة
+if "GOOGLE_API_KEY" in st.secrets:
+    try:
+        genai.configure(api_key=st.secrets["GOOGLE_API_KEY"])
+        # نستخدم flash-latest لضمان استقرار الاتصال وسرعته
+        model = genai.GenerativeModel('gemini-1.5-flash-latest')
+        # اختبار أولي صامت
+        model.generate_content("ping") 
+    except Exception:
+        # إذا فشل الفلاش، ننتقل فوراً لموديل برو كخطة بديلة
+        model = genai.GenerativeModel('gemini-pro')
+else:
+    st.error("🚨 مفتاح الـ API مفقود في السيكرتس!")
+    st.stop import streamlit as st
+import google.generativeai as genai
 import time
 from datetime import datetime
 
